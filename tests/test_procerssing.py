@@ -18,11 +18,8 @@ def test_filter_by_state():
                                {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}]
 
 
-
-@pytest.mark.parametrize("date_account",[{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
+@pytest.mark.parametrize("dat_account", [{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
                                          {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}])
-def test_masks_len_account(date_account):
+def test_sort_by_date(dat_account):
     """Функция проверки длинны"""
-    assert len(date_account) > 0
-
-
+    assert len(dat_account) > 0
