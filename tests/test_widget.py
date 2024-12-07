@@ -6,8 +6,7 @@ from src.widget import get_date, mask_account_card
 @pytest.fixture
 def widget():
     """Функция возвращения вывода"""
-    return ["Счет ** 4305", "Visa Platinum 700079 ** **** 6361", "Maestro 700079 ** **** 6361",
-            "(11.03.2024)"]
+    return ["Счет ** 4305", "Visa Platinum 700079 ** **** 6361", "Maestro 700079 ** **** 6361", "(11.03.2024)"]
 
 
 def test_mask_account_card():
