@@ -9,7 +9,7 @@ def get_transactions(transactions_code):
         with open(transactions_code, "r", encoding="utf-8") as file:
             transaction_content = json.load(file)
             return transaction_content
-    except FileNotFoundError as ex:
+    except FileNotFoundError:
         return transactions
-    except json.JSONDecodeError as ex:
+    except json.JSONDecodeError:
         return transactions

@@ -1,6 +1,6 @@
-import pytest
-from unittest.mock import patch, MagicMock
-from pathlib import Path
+from unittest.mock import patch
+
+
 from src.utils import get_transactions
 
 
@@ -16,6 +16,3 @@ def test_file_no_found(mock_file):
     """Проверяет на возвращение пустого списка при ошибке"""
     transactions = get_transactions("data/operations.json")
     assert transactions == []
-
-
-
