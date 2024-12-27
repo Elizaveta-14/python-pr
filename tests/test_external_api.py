@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 import json
 import os
 import requests
@@ -12,7 +12,7 @@ import pytest
 def test_get_convert_amount(mock_get):
     """Проверяет статус коде 200"""
     mock_get.return_value.status_code = 200
-    assert get_convert_amount != []
+    assert get_convert_amount != 0
 
 
 @patch("json.loads")
@@ -28,9 +28,51 @@ def test_convert_transaction_to_rub(mock_get):
             }
 
 
-@patch("builtins.open", side_effect=KeyError)
-def test_file_not_found(amount):
-    """Проверяет на возвращение пустого списка при ошибке"""
-    transactions = get_convert_amount(amount)
-    assert transactions == 0
+class TestConvertTransactionToRub(unittest.TestCase):
+    @patch('src.external_api.get_convert_amount')
+    def test_convert_transaction_to_rub_usd(self, mock_get_convert_amount):
+        """Проверяем результат в USD"""
 
+        transaction = {
+            "id": 1,
+            "state": "COMPLETED",
+            "date": "2021-01-01T00:00:00",
+            "operationAmount": {
+                "amount": "1000.00",
+                "currency": {
+                    "name": "доллар",
+                    "code": "USD"
+                }
+            }
+        }
+
+
+        mock_get_convert_amount.return_value = 75000.00
+        result = convert_transaction_to_rub(transaction)
+        expected_result = 75000.00
+        self.assertEqual(result, expected_result)
+
+
+@patch('src.external_api.get_convert_amount')
+def test_convert_transaction_other_currency(self, mock_get_convert_amount):
+
+
+
+    transaction = {
+        "id": 3,
+        "state": "COMPLETED",
+        "date": "2021-01-03T00:00:00",
+        "operationAmount": {
+            "amount": "3000.00",
+            "currency": {
+                "name": "другая валюта",
+                "code": "OTHER"
+            }
+        }
+    }
+
+
+    mock_get_convert_amount.return_value = None
+    result = convert_transaction_to_rub(transaction)
+    expected_result = 3000.00
+    self.assertEqual(result, expected_result)
