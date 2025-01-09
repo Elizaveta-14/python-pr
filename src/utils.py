@@ -8,12 +8,9 @@ abs_log_file_path = os.path.abspath(rel_log_file_path)
 logger = logging.getLogger("utils")
 logger.setLevel(logging.INFO)
 file_handler = logging.FileHandler(abs_log_file_path, "w", encoding="utf-8")
-file_formatter = logging.Formatter(
-    "%(asctime)s - %(name)s - %(levelname)s: %(message)s"
-)
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
-
 
 
 def get_transactions(transactions_code):
@@ -31,3 +28,7 @@ def get_transactions(transactions_code):
     except json.JSONDecodeError:
         logger.error("Импортируемый список пуст или отсутствует.")
         return transactions
+
+
+if __name__ == "__main__":
+    get_transactions(r"..\data\operations.json")
