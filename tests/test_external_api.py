@@ -11,19 +11,6 @@ def test_get_convert_amount(mock_get):
     assert get_convert_amount != 0
 
 
-@patch("json.loads")
-def test_convert_transaction_to_rub(mock_get):
-    """Проверяет на возвращение словаря"""
-    mock_get.return_value.json.return_value = {
-        "date": "2018-02-22",
-        "historical": "",
-        "info": {"rate": 148.972231, "timestamp": 1519328414},
-        "query": {"amount": 1, "from": "USD", "to": "RUB"},
-        "result": 104.461,
-        "success": "true",
-    }
-
-
 class TestConvertTransactionToRub(unittest.TestCase):
     @patch("src.external_api.get_convert_amount")
     def test_convert_transaction_to_rub_usd(self, mock_get_convert_amount):
