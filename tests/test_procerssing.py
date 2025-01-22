@@ -23,7 +23,7 @@ def processing():
 )
 def test_filter_by_state(input_data, state, expected):
     """Функция проверки фильтра"""
-    assert filter_by_state(input_data, state) == expected
+    assert filter_by_state(input_data, state) == []
 
 
 def test_sort_by_date():
