@@ -10,7 +10,7 @@ def filter_by_state(word: list, state="EXECUTED") -> list:
     """Функция вывод ключ значение"""
     new_state = []
     for dic_word in word:
-        if dic_word["state"] == "state":
+        if dic_word["state"] == state:
             new_state.append(dic_word)
     return new_state
 

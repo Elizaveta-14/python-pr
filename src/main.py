@@ -2,7 +2,6 @@ import os
 import re
 
 from src.generators import filter_by_currency
-from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
 from src.transactions import read_csv, read_excel
 from src.utils import get_transactions
@@ -91,7 +90,6 @@ def ending_result(data: list) -> None:
                     print(f"Ошибка: {transaction} не является словарём")
                     continue
             date = get_date(transaction.get("date"))
-
             try:
                 mask_from = mask_account_card(transaction["from"])
                 print(f"{date} {transaction["description"]} {mask_from} -> ", end="")
